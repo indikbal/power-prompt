@@ -66,7 +66,7 @@ export default function Home() {
           </div>
         </div>
       </aside>
-      <div className="w-[calc(100%-60px)] h-full bg-white ml-[60px] bg-slate-900">
+      <div className="w-[calc(100%-60px)] h-full ml-[60px] bg-slate-900">
         <div className="flex flex-col">
           <div className="flex flex-row">
           <div
