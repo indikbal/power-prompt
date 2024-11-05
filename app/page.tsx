@@ -77,7 +77,7 @@ export default function Home() {
               <div className="h-[calc(100vh-0px)] flex flex-col justify-center ">
                 <div className="container mx-auto">
                   <div className="flex flex-wrap justify-center mb-10">
-                    <div className="lg:w-10/12">
+                    <div className="lg:w-8/12">
                       <div className="pb-5 lg:pb-7 text-center">
                         <div className="mb-10">
                           <h4 className="text-4xl font-normal mb-3 text-white">
@@ -88,7 +88,7 @@ export default function Home() {
                           </p>
                         </div>
                         {!showChat && ( 
-                       <div className="flex flex-row justify-center">
+                       <div className="block  sm:flex sm:flex-row px-3">
                         <input 
                           type="text" 
                           value={prompt}
@@ -97,13 +97,13 @@ export default function Home() {
                             setError('');
                           }}
                           placeholder="Type here your prompt.." 
-                          className={`w-6/12 py-3 px-4 rounded-full border ${
+                          className={`w-full mb-3 md:mb-0 md:mr-3 py-3 px-4 rounded-full border ${
                             error ? 'border-red-500' : 'border-gray-300'
                           } focus:outline-none focus:border-emerald-500`}
                         />
                         <button 
                            onClick={handleGeneratePowerPrompt}
-                          className="bg-black text-white px-4 py-3 rounded-full ml-3 text-sm py-2 px-7 text-emerald-500 font-semibold hover:shadow-lg hover:shadow-emerald-500 hover:transition-all duration-300 flex flex-row gap-2 items-center"
+                          className="bg-black ml-auto mr-auto w-[300px]  px-4 py-3 rounded-full ml-3 text-sm py-2 px-7 text-emerald-500 font-semibold hover:shadow-lg hover:shadow-emerald-500 hover:transition-all duration-300 flex flex-row gap-2 items-center"
                         >
                           <BsStars className="text-xl" />
                           Generate Power Prompt
