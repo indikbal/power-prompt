@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { BsSend } from 'react-icons/bs';
 import { findMockResponse } from '../utils/mockResponses';
-import PromptModal from './PromptModal';
+import PromptModal from './PromptDrawer';
 import { BiSolidEdit } from "react-icons/bi";
 
 interface Message {

@@ -8,7 +8,8 @@ import { MdChat } from "react-icons/md";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { BsStars } from "react-icons/bs";
 import AIChatInterface from './component/AIChatInterface';
-import PromptModal from './component/PromptModal';
+import PromptDrawer from './component/PromptDrawer';
+
 
 
 export default function Home() {
@@ -38,8 +39,7 @@ export default function Home() {
   };
 
   return (
-    <>      
-
+    <> 
       <aside className="fixed top-0 left-0 w-[60px] h-full bg-black">
         <div className="flex flex-col h-full">
           <div className="flex flex-col justify-center pt-5 pb-5 justify-between h-full items-center" >
@@ -121,15 +121,13 @@ export default function Home() {
           </div>
         </div>
        
-      <PromptModal
+      <PromptDrawer
          isOpen={isModalOpen}
          onClose={() => setIsModalOpen(false)}
          onGenerate={handleGenerateEnhancedPrompt}
          initialPrompt={prompt}
       />
-      </div>
-
-      
+      </div>      
     </>
   );
 }
