@@ -9,6 +9,9 @@ import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { BsStars } from "react-icons/bs";
 import AIChatInterface from './component/AIChatInterface';
 import PromptDrawer from './component/PromptDrawer';
+import ClaudeInterface from '../app/component/models/ClaudeInterface'; // Example model interface
+import GPTInterface from '../app/component/models/GPTInterface'; // Example model interface
+import ModelSelector from './component/ModalSelector';
 
 
 
@@ -17,6 +20,8 @@ export default function Home() {
   const [showChat, setShowChat] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [error, setError] = useState('');
+  const [selectedModel, setSelectedModel] = useState('gpt-4'); // Add this new state
+
 
   const handleGeneratePowerPrompt = () => {
     if (!prompt.trim()) {
@@ -37,6 +42,19 @@ export default function Home() {
     setShowChat(false);         // Hide the chat
     setIsModalOpen(true);       // Show the modal
   };
+
+  const renderModelInterface = () => {
+    switch (selectedModel) {
+      case 'gpt-4':
+        return <GPTInterface onClose={() => setShowChat(false)} initialPrompt={prompt} onEditPrompt={handleEditPrompt} />;
+      case 'claude':
+        return <ClaudeInterface onClose={() => setShowChat(false)} initialPrompt={prompt} onEditPrompt={handleEditPrompt} />;
+      default:
+        return <GPTInterface onClose={() => setShowChat(false)} initialPrompt={prompt} onEditPrompt={handleEditPrompt} />;
+    }
+  };
+
+
 
   return (
     <> 
@@ -87,31 +105,37 @@ export default function Home() {
                             We make your prompt more powerful by adding more context to it.
                           </p>
                         </div>
-                        {!showChat && ( 
-                       <div className="block  sm:flex sm:flex-row px-3">
-                        <input 
-                          type="text" 
-                          value={prompt}
-                          onChange={(e) => {
-                            setPrompt(e.target.value);
-                            setError('');
-                          }}
-                          placeholder="Type here your prompt.." 
-                          className={`w-full mb-3 md:mb-0 md:mr-3 py-3 px-4 rounded-full border ${
-                            error ? 'border-red-500' : 'border-gray-300'
-                          } focus:outline-none focus:border-emerald-500`}
-                        />
-                        <button 
-                           onClick={handleGeneratePowerPrompt}
-                          className="bg-black ml-auto mr-auto w-[300px]  px-4 py-3 rounded-full ml-3 text-sm py-2 px-7 text-emerald-500 font-semibold hover:shadow-lg hover:shadow-emerald-500 hover:transition-all duration-300 flex flex-row gap-2 items-center"
-                        >
-                          <BsStars className="text-xl" />
-                          Generate Power Prompt
-                        </button>
-                       </div>
+                        {!showChat && (
+                          <div className="block sm:flex sm:flex-col px-3 gap-3">
+                            <ModelSelector
+                              selectedModel={selectedModel}
+                              onModelSelect={setSelectedModel}
+                              className="w-full mb-3"
+                            />
+                            <div className="block sm:flex sm:flex-row">
+                              <input 
+                                type="text" 
+                                value={prompt}
+                                onChange={(e) => {
+                                  setPrompt(e.target.value);
+                                  setError('');
+                                }}
+                                placeholder="Type here your prompt.." 
+                                className={`w-full mb-3 md:mb-0 md:mr-3 py-3 px-4 rounded-full border ${
+                                  error ? 'border-red-500' : 'border-gray-300'
+                                } focus:outline-none focus:border-emerald-500`}
+                              />
+                              <button 
+                                onClick={handleGeneratePowerPrompt}
+                                className="bg-black ml-auto mr-auto w-[300px] px-4 py-3 rounded-full ml-3 text-sm py-2 px-7 text-emerald-500 font-semibold hover:shadow-lg hover:shadow-emerald-500 hover:transition-all duration-300 flex flex-row gap-2 items-center"
+                              >
+                                <BsStars className="text-xl" />
+                                Generate Power Prompt
+                              </button>
+                            </div>
+                          </div>
                         )}
-                        {showChat && <AIChatInterface onClose={() => setShowChat(false)} initialPrompt={prompt} 
-                         onEditPrompt={handleEditPrompt} /> }
+                         {showChat && renderModelInterface()}
                       </div>
                     </div>
                   </div>
